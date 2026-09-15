@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коммерческие предложения — SEO, разработка, контент, маркетинг</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #eef0f2;
+    --bg-panel: #ffffff;
+    --ink: #14171c;
+    --ink-soft: #4d5560;
+    --ink-faint: #8992a0;
+    --line: #d8dce2;
+    --accent: #3652ff;
+    --accent-ink: #ffffff;
+    --accent-dim: #e7eaff;
+    --good: #157a5c;
+    --good-bg: #e3f3ec;
+    --bad: #b23b3b;
+    --bad-bg: #f7e9e8;
+    --navy: #10131c;
+    --navy-soft: #1c2233;
+    --radius-s: 4px;
+    --radius-m: 10px;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  a{ color: inherit; }
+  p{ margin: 0 0 0.8em; }
+  ul{ margin:0; padding:0; list-style:none; }
+
+  ::selection{ background: var(--accent); color:#fff; }
+
+  /* ---------- Skip / focus ---------- */
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Layout shell ---------- */
+  .shell{
+    display:grid;
+    grid-template-columns: 280px 1fr;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 96px 40px 64px;
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+  .hero-kicker{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-bottom: 28px;
+  }
+  .hero-kicker .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--accent);
+    flex:none;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 1.03;
+    max-width: 15ch;
+  }
+  .hero h1 span{
+    color: var(--accent);
+  }
+  .hero-sub{
+    margin-top: 26px;
+    max-width: 46ch;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+  }
+  .hero-stats{
+    display:flex;
+    gap: 48px;
+    margin-top: 56px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+  }
+  .hero-stat b{
+    display:block;
+    font-family:'Unbounded', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+  }
+  .hero-stat span{
+    color: var(--ink-faint);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- Sticky nav ---------- */
+  nav.toc{
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 40px 24px 40px 40px;
+    border-right: 1px solid var(--line);
+    scrollbar-width: thin;
+  }
+  nav.toc .toc-title{
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    text-transform: none;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+  nav.toc ol{
+    list-style:none;
+    margin:0; padding:0;
+    counter-reset: tocnum;
+    display:flex;
+    flex-direction:column;
+    gap: 2px;
+  }
+  nav.toc li{
+    counter-increment: tocnum;
+  }
+  nav.toc a{
+    display:flex;
+    align-items:baseline;
+    gap: 10px;
+    text-decoration:none;
+    padding: 9px 10px;
+    border-radius: var(--radius-s);
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+    transition: background .15s ease, color .15s ease;
+  }
+  nav.toc a::before{
+    content: counter(tocnum, decimal-leading-zero);
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    flex: none;
+  }
+  nav.toc a:hover{
+    background: var(--accent-dim);
+    color: var(--ink);
+  }
+  nav.toc a.active{
+    background: var(--navy);
+    color: #fff;
+  }
+  nav.toc a.active::before{
+    color: #9fb0ff;
+  }
+  nav.toc .toc-foot{
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Main content ---------- */
+  main{
+    padding: 40px 40px 120px;
+    min-width: 0;
+  }
+
+  section.service{
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 24px;
+  }
+  section.service:first-of-type{ padding-top: 12px; }
+  section.service:last-of-type{ border-bottom: none; }
+
+  .service-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .service-num{
+    font-family:'Unbounded', sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display:block;
+  }
+  .service-head h2{
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    max-width: 22ch;
+  }
+  .price-tag{
+    flex: none;
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: var(--radius-m);
+    text-align: right;
+    min-width: 190px;
+  }
+  .price-tag .amount{
+    font-family:'Unbounded', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display:block;
+    line-height:1.2;
+  }
+  .price-tag .unit{
+    font-size: 0.78rem;
+    color: #9aa4c7;
+    margin-top: 2px;
+    display:block;
+  }
+
+  .service-desc{
+    margin-top: 20px;
+    max-width: 62ch;
+    font-size: 1.03rem;
+    color: var(--ink-soft);
+  }
+
+  .service-grid{
+    margin-top: 32px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 720px){
+    .service-grid{ grid-template-columns: 1fr; }
+  }
+
+  .panel{
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    padding: 22px 24px;
+  }
+  .panel h3{
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--ink-soft);
+  }
+  .panel.include h3{ color: var(--good); }
+  .panel.exclude h3{ color: var(--bad); }
+
+  .panel ul{ display:flex; flex-direction:column; gap: 10px; }
+  .panel li{
+    display:flex;
+    gap: 10px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+  .panel li::before{
+    flex: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 0.68rem;
+    margin-top: 1px;
+    font-weight: 700;
+  }
+  .panel.include li::before{
+    content: "+";
+    background: var(--good-bg);
+    color: var(--good);
+  }
+  .panel.exclude li::before{
+    content: "–";
+    background: var(--bad-bg);
+    color: var(--bad);
+  }
+
+  .meta-row{
+    margin-top: 24px;
+    display:flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .meta-block{
+    flex: 1 1 220px;
+    background: var(--accent-dim);
+    border-radius: var(--radius-m);
+    padding: 16px 20px;
+  }
+  .meta-block h4{
+    font-family:'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .meta-block p{
+    margin:0;
+    font-size: 0.94rem;
+  }
+  .commission-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top: 20px;
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 8px 14px;
+    border-radius: 999px;
+  }
+  .commission-chip b{ color: var(--ink); }
+
+  /* ---------- Rate revision ---------- */
+  section.rates{
+    padding: 56px 0;
+  }
+  .rates-grid{
+    margin-top: 28px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 780px){
+    .rates-grid{ grid-template-columns: 1fr; }
+  }
+  .rate-card{
+    background: var(--navy);
+    color: #fff;
+    border-radius: var(--radius-m);
+    padding: 26px 24px;
+  }
+  .rate-card .pct{
+    font-family:'Unbounded', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height:1;
+  }
+  .rate-card p{
+    margin-top: 12px;
+    color: #b7bfd8;
+    font-size: 0.92rem;
+  }
+  .rates-note{
+    margin-top: 20px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+
+  /* ---------- Summary table ---------- */
+  section.summary{
+    padding: 56px 0 20px;
+  }
+  .table-wrap{
+    margin-top: 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    background: var(--bg-panel);
+  }
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  thead th{
+    text-align: left;
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 20px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  tbody td{
+    padding: 14px 20px;
+    border-top: 1px solid var(--line);
+  }
+  tbody tr:nth-child(even){ background: #f7f8f9; }
+  tbody td:first-child{ font-weight: 600; }
+  tbody td:last-child{ color: var(--ink-soft); text-align: right; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: 48px 40px 60px;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: var(--ink-faint);
+    font-size: 0.86rem;
+  }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 980px){
+    .shell{ grid-template-columns: 1fr; }
+    nav.toc{
+      position: sticky;
+      top:0;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 16px 20px;
+      background: var(--bg);
+      z-index: 10;
+    }
+    nav.toc .toc-title, nav.toc .toc-foot{ display:none; }
+    nav.toc ol{
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 8px;
+      padding-bottom: 4px;
+    }
+    nav.toc a{ white-space: nowrap; }
+    .hero{ padding: 56px 20px 40px; }
+    main{ padding: 32px 20px 80px; }
+    footer{ padding: 32px 20px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-kicker"><span class="dot"></span>Обновлённая подборка услуг для отправки клиентам</div>
+  <h1>Коммерческие <span>предложения</span></h1>
+  <p class="hero-sub">IT-компания полного цикла: поисковое продвижение, разработка, контент и маркетинговая аналитика — десять услуг, которые можно комбинировать под задачу клиента.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><b>10</b><span>услуг в подборке</span></div>
+    <div class="hero-stat"><b>1 000 ₽ — 50 000 ₽</b><span>диапазон стоимости</span></div>
+    <div class="hero-stat"><b>5%</b><span>стандартная комиссия проджекта</span></div>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="toc" aria-label="Оглавление">
+    <div class="toc-title">Содержание</div>
+    <ol>
+      <li><a href="#seo-lite">SEO Lite</a></li>
+      <li><a href="#seo-pro">SEO PRO</a></li>
+      <li><a href="#dev-hours">Часы разработчика</a></li>
+      <li><a href="#copywriting">Копирайтинг</a></li>
+      <li><a href="#seo-audit">SEO-аудит сайта</a></li>
+      <li><a href="#market-analysis">Маркетинговый анализ</a></li>
+      <li><a href="#geo">GEO-продвижение</a></li>
+      <li><a href="#outreach">Аутрич</a></li>
+      <li><a href="#maps">Размещение на картах</a></li>
+      <li><a href="#rates">Ставки проджекта</a></li>
+    </ol>
+    <div class="toc-foot">Сводная таблица услуг — в конце страницы.</div>
+  </nav>
+
+  <main>
+
+    <section class="service" id="seo-lite">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 01</span>
+          <h2>SEO Lite</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">40 000 ₽</span>
+          <span class="unit">в месяц</span>
+        </div>
+      </div>
+      <p class="service-desc">Базовый пакет поискового продвижения для компаний, которые хотят системно развивать видимость сайта.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Что входит</h3>
+          <ul>
+            <li>Работа SEO-специалиста</li>
+            <li>Подготовка тем для размещения SEO-текстов</li>
+            <li>SEO-рекомендации по развитию сайта</li>
+            <li>Работа над повышением поисковой видимости</li>
+          </ul>
+        </div>
+        <div class="panel exclude">
+          <h3>Что не входит</h3>
+          <ul>
+            <li>Часы разработчика</li>
+            <li>Услуги копирайтера</li>
+            <li>Написание и размещение текстов нашей командой</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-block">
+          <h4>Для кого подходит</h4>
+          <p>Компаниям, у которых есть собственные ресурсы для разработки и написания контента.</p>
+        </div>
+      </div>
+      <div class="commission-chip">Комиссия проджекта <b>5%</b></div>
+    </section>
+
+    <section class="service" id="seo-pro">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 02</span>
+          <h2>SEO PRO</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">50 000 ₽</span>
+          <span class="unit">в месяц</span>
+        </div>
+      </div>
+      <p class="service-desc">Комплексное SEO-сопровождение с аудитом, разработкой и подготовкой контента командой IT-компании.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Что входит</h3>
+          <ul>
+            <li>SEO-аудит сайта</li>
+            <li>Разработчик — 8 часов</li>
+            <li>Копирайтер — 8 000 символов</li>
+            <li>Подготовка текстов нашей командой</li>
+            <li>Размещение текстов на сайте</li>
+            <li>SEO-специалист и рекомендации по продвижению</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Результат</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0;">Комплексное SEO-сопровождение с техническими доработками, созданием контента и размещением материалов.</p>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-block">
+          <h4>Для кого подходит</h4>
+          <p>Компаниям, которым необходимо комплексное SEO-сопровождение.</p>
+        </div>
+      </div>
+      <div class="commission-chip">Комиссия проджекта <b>5%</b></div>
+    </section>
+
+    <section class="service" id="dev-hours">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 03</span>
+          <h2>Часы разработчика</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">2 500 ₽</span>
+          <span class="unit">за час</span>
+        </div>
+      </div>
+      <p class="service-desc">Привлечение разработчика для выполнения конкретных технических задач на сайте.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Что может выполнять разработчик</h3>
+          <ul>
+            <li>Внесение изменений на сайт</li>
+            <li>Исправление технических ошибок</li>
+            <li>Реализация SEO-рекомендаций</li>
+            <li>Настройка и доработка функциональности</li>
+            <li>Интеграции с необходимыми сервисами</li>
+            <li>Оптимизация технических параметров сайта</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Условия</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0;">Объём работ и количество часов согласовываются до начала выполнения задач.</p>
+        </div>
+      </div>
+
+      <div class="commission-chip">Комиссия проджекта <b>не предусмотрена</b></div>
+    </section>
+
+    <section class="service" id="copywriting">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 04</span>
+          <h2>Копирайтинг</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">1 000 ₽</span>
+          <span class="unit">за 1 000 символов</span>
+        </div>
+      </div>
+      <p class="service-desc">Создание качественных текстов для сайта, SEO-продвижения и наполнения страниц.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Что входит</h3>
+          <ul>
+            <li>Написание текстов для сайта</li>
+            <li>Подготовка SEO-текстов</li>
+            <li>Работа по техническому заданию</li>
+            <li>Адаптация материалов под целевую аудиторию</li>
+            <li>Внесение согласованных корректировок</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Условия</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0;">Стоимость рассчитывается исходя из объёма текста.</p>
+        </div>
+      </div>
+
+      <div class="commission-chip">Комиссия проджекта <b>не предусмотрена</b></div>
+    </section>
+
+    <section class="service" id="seo-audit">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 05</span>
+          <h2>SEO-аудит сайта</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">25 000 ₽</span>
+          <span class="unit">за аудит</span>
+        </div>
+      </div>
+      <p class="service-desc">Комплексная проверка сайта для выявления проблем, влияющих на поисковое продвижение.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Что входит</h3>
+          <ul>
+            <li>Технический анализ сайта</li>
+            <li>Проверка индексации и доступности страниц</li>
+            <li>Анализ структуры и навигации</li>
+            <li>Проверка текстов, заголовков и мета-тегов</li>
+            <li>Выявление технических и SEO-ошибок</li>
+            <li>Определение страниц, требующих доработки</li>
+            <li>Рекомендации по оптимизации</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Результат</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0;">Понимание текущего состояния сайта, основных проблем и приоритетных шагов для улучшения поисковой видимости.</p>
+        </div>
+      </div>
+
+      <div class="commission-chip">Комиссия проджекта <b>5%</b></div>
+    </section>
+
+    <section class="service" id="market-analysis">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 06</span>
+          <h2>Маркетинговый анализ</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">30 000 ₽</span>
+          <span class="unit">за анализ</span>
+        </div>
+      </div>
+      <p class="service-desc">Исследование рынка, конкурентов и целевой аудитории для принятия обоснованных маркетинговых решений.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Зачем нужен</h3>
+          <ul>
+            <li>Понять потребности и критерии выбора целевой аудитории</li>
+            <li>Изучить предложения, цены и позиционирование конкурентов</li>
+            <li>Выявить точки роста и новые возможности</li>
+            <li>Определить конкурентные преимущества компании</li>
+            <li>Сформировать основу для SEO, рекламы, контента и развития сайта</li>
+          </ul>
+        </div>
+        <div class="panel include">
+          <h3>Что входит</h3>
+          <ul>
+            <li>Анализ рынка и ниши</li>
+            <li>Анализ конкурентов</li>
+            <li>Анализ целевой аудитории</li>
+            <li>Анализ позиционирования</li>
+            <li>Выявление точек роста</li>
+            <li>Рекомендации по дальнейшему развитию</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-block">
+          <h4>Результат</h4>
+          <p>Структурированное понимание рынка и рекомендации для дальнейших маркетинговых действий.</p>
+        </div>
+      </div>
+      <div class="commission-chip">Комиссия проджекта <b>5%</b></div>
+    </section>
+
+    <section class="service" id="geo">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 07</span>
+          <h2>GEO-продвижение</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">40 000 ₽</span>
+          <span class="unit">в месяц</span>
+        </div>
+      </div>
+      <p class="service-desc">GEO (Generative Engine Optimization) — оптимизация присутствия компании и её услуг в ответах AI-поисковиков и генеративных систем. Цель — повысить вероятность того, что бренд будет замечен и корректно представлен при поиске пользователями через AI-сервисы.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Что входит</h3>
+          <ul>
+            <li>Анализ текущего присутствия бренда в AI-ответах и поисковой выдаче</li>
+            <li>Анализ сайта, структуры и экспертности контента</li>
+            <li>Подготовка рекомендаций по улучшению представления компании</li>
+            <li>Формирование тем и контентных направлений</li>
+            <li>Подготовка и оптимизация материалов под вопросы целевой аудитории</li>
+            <li>SEO-рекомендации и технические задачи в рамках согласованного объёма</li>
+            <li>Разработчик — до 8 часов</li>
+            <li>Копирайтер — до 8 000 символов</li>
+            <li>Подготовка и размещение текстов нашей командой</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Результат</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0;">Комплексная работа над тем, чтобы компания, её услуги и экспертность были понятнее для поисковых систем и AI-платформ.</p>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-block">
+          <h4>Для кого подходит</h4>
+          <p>Компаниям, которые хотят развивать видимость бренда не только в классическом поиске, но и в генеративных AI-сервисах.</p>
+        </div>
+      </div>
+      <div class="commission-chip">Комиссия проджекта <b>5%</b></div>
+    </section>
+
+    <section class="service" id="outreach">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 08</span>
+          <h2>Аутрич</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">35 000 ₽</span>
+          <span class="unit">в месяц</span>
+        </div>
+      </div>
+      <p class="service-desc">Продвижение сайта через внешние публикации, партнёрские размещения и получение качественных ссылок с релевантных площадок.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Что входит</h3>
+          <ul>
+            <li>Анализ ссылочного профиля и поиск возможностей для роста</li>
+            <li>Подбор тематических сайтов и площадок</li>
+            <li>Поиск контактов владельцев и редакторов площадок</li>
+            <li>Подготовка персонализированных предложений</li>
+            <li>Переговоры и согласование условий размещения</li>
+            <li>Подготовка материалов или технических заданий для публикаций</li>
+            <li>Контроль выхода публикаций и ссылок</li>
+            <li>Ежемесячный отчёт по выполненным размещениям</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Результат</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0 0 16px;">Рост количества качественных упоминаний и ссылок, укрепление авторитетности сайта и расширение присутствия бренда в интернете.</p>
+          <h3 style="margin-top:16px;">Важно</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0;">Стоимость размещений на сторонних площадках, если они требуются, оплачивается отдельно после согласования с клиентом.</p>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-block">
+          <h4>Для кого подходит</h4>
+          <p>Компаниям, которым необходимо укрепить ссылочный профиль, повысить узнаваемость и привлечь дополнительный целевой трафик.</p>
+        </div>
+      </div>
+      <div class="commission-chip">Комиссия проджекта <b>5%</b></div>
+    </section>
+
+    <section class="service" id="maps">
+      <div class="service-head">
+        <div>
+          <span class="service-num">Услуга 09</span>
+          <h2>Размещение на картах</h2>
+        </div>
+        <div class="price-tag">
+          <span class="amount">20 000 ₽</span>
+          <span class="unit">в месяц</span>
+        </div>
+      </div>
+      <p class="service-desc">Оптимизация присутствия компании в картах и локальных сервисах, чтобы потенциальным клиентам было проще найти организацию, узнать об услугах и связаться с ней.</p>
+
+      <div class="service-grid">
+        <div class="panel include">
+          <h3>Что входит</h3>
+          <ul>
+            <li>Аудит текущих карточек компании</li>
+            <li>Создание или оптимизация профилей в основных картографических сервисах</li>
+            <li>Заполнение информации о компании, услугах, графике и контактах</li>
+            <li>Подготовка описаний и подбор категорий</li>
+            <li>Добавление фотографий и актуальных материалов</li>
+            <li>Настройка ссылок, контактов и способов связи</li>
+            <li>Рекомендации по работе с отзывами</li>
+            <li>Контроль корректности размещённой информации</li>
+            <li>Отчёт по выполненным работам</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Результат</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0 0 16px;">Более полное и корректное представление компании в картах, повышение удобства для клиентов и усиление локальной видимости.</p>
+          <h3 style="margin-top:16px;">Важно</h3>
+          <p style="font-size:0.95rem; color:var(--ink-soft); margin:0;">Платные рекламные размещения, продвижение внутри карт и дополнительные платные сервисы оплачиваются отдельно.</p>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-block">
+          <h4>Для кого подходит</h4>
+          <p>Компаниям с офисами, филиалами, точками продаж или услугами, ориентированными на клиентов из конкретных городов и районов.</p>
+        </div>
+      </div>
+      <div class="commission-chip">Комиссия проджекта <b>5%</b></div>
+    </section>
+
+    <section class="rates" id="rates">
+      <span class="service-num">10</span>
+      <h2>Пересмотр ставки проджекта</h2>
+      <p class="service-desc" style="margin-top:16px;">Изменённые условия комиссии — применяются к основным проектам и допродажам.</p>
+
+      <div class="rates-grid">
+        <div class="rate-card">
+          <div class="pct">10%</div>
+          <p>Все основные проекты — вместо прежних 5%.</p>
+        </div>
+        <div class="rate-card">
+          <div class="pct">7%</div>
+          <p>Допродажи для своего клиента.</p>
+        </div>
+        <div class="rate-card">
+          <div class="pct">15%</div>
+          <p>Допродажи для нового клиента.</p>
+        </div>
+      </div>
+      <p class="rates-note">К допродажам относятся: дополнительные страницы, SEO-услуги, часы разработчика и другие дополнительные работы.</p>
+    </section>
+
+    <section class="summary" id="summary">
+      <span class="service-num">Итого</span>
+      <h2>Сводная таблица услуг</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Услуга</th>
+              <th>Цена</th>
+              <th>Комиссия проджекта</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>SEO Lite</td><td>40 000 ₽ / месяц</td><td>5%</td></tr>
+            <tr><td>SEO PRO</td><td>50 000 ₽ / месяц</td><td>5%</td></tr>
+            <tr><td>Часы разработчика</td><td>2 500 ₽ / час</td><td>Не предусмотрена</td></tr>
+            <tr><td>Копирайтинг</td><td>1 000 ₽ / 1 000 символов</td><td>Не предусмотрена</td></tr>
+            <tr><td>SEO-аудит</td><td>25 000 ₽</td><td>5%</td></tr>
+            <tr><td>Маркетинговый анализ</td><td>30 000 ₽</td><td>5%</td></tr>
+            <tr><td>GEO-продвижение</td><td>40 000 ₽ / месяц</td><td>5%</td></tr>
+            <tr><td>Аутрич</td><td>35 000 ₽ / месяц</td><td>5%</td></tr>
+            <tr><td>Размещение на картах</td><td>20 000 ₽ / месяц</td><td>5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span>Коммерческие предложения · IT-компания</span>
+  <span>SEO · разработка · контент · маркетинг</span>
+</footer>
+
+<script>
+  const links = Array.from(document.querySelectorAll('nav.toc a'));
+  const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+  const setActive = () => {
+    let current = sections[0];
+    const scrollPos = window.scrollY + 120;
+    for (const sec of sections){
+      if (sec.offsetTop <= scrollPos) current = sec;
+    }
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+    });
+  };
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  window.addEventListener('load', setActive);
+</script>
+
+</body>
+</html>
